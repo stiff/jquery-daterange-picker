@@ -206,12 +206,12 @@ function DaterangePicker(selector) {
 	});
 
 	var MainView = Backbone.View.extend({
-		calendar_view: new CalendarView({
-			model: model,
-			today: new Date()
-		}),
-
 		render: function() {
+			this.calendar_view = new CalendarView({
+				model: model,
+				today: model.startDate() || model.endDate() || new Date()
+			});
+
 			this.$el.addClass('daterangepicker').append(this.calendar_view.render().$el).hide();
 			$(selector).after(this.$el)
 			return this;
@@ -222,12 +222,8 @@ function DaterangePicker(selector) {
 	    return this;
 	  }
 	});
-	var main_view = new MainView().render();
 	model.readInputs();
-/*	model.set({
-		start_date: beginningOfWeek(dateWithoutTime(new Date())),
-		end_date: endOfWeek(dateWithoutTime(new Date()))
-	})*/
+	var main_view = new MainView().render();
 	$(selector).on('click', _.bind(main_view.toggleCalendar, main_view))
 
 	return {m : model};
