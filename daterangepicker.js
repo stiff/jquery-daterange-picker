@@ -214,6 +214,10 @@ function DaterangePicker(selector) {
 
 			this.$el.addClass('daterangepicker').append(this.calendar_view.render().$el).hide();
 			$(selector).after(this.$el)
+			this.$el.css({
+				left: $(selector).offset().left - 75 + 'px',
+				top: 25 + $(selector).offset().top + 'px'
+			})
 			return this;
 		},
 
