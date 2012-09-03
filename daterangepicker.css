@@ -6,7 +6,7 @@
 .daterangepicker .nav {
 	position: relative;
 	text-align: center;
-	padding: 4px 0;
+	padding: 0 0 8px;
 }
 .daterangepicker .nav .prev_month, .daterangepicker .nav .next_month {
 	display: block;
