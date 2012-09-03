@@ -138,7 +138,7 @@ function DaterangePicker(selector) {
 
 			var i = 0;
 			while (d <= e && i < 50) {
-				var a = $('<a href="#"></a>').html(d.getDate());
+				var a = $('<a href="#"></a>').html($('<span></span>').html(d.getDate()));
 				a.addClass('date').data({value: asString(d)});
 				if ((d < bm) || (d > em)) {
 					a.addClass('inactive')
@@ -160,26 +160,15 @@ function DaterangePicker(selector) {
 			return this;
 		},
 
-	  toggle: function() {
-			//	    $(this.el).html(this.template(this.model.toJSON()));
-			if (this.$el.is(':visible')) {
-				this.$el.hide()
-			} else {
-				this.$el.show()
-				
-			}
-	    return this;
-	  },
-
 		selectDate: function(e) {
-			this.model.addDate(fromString($(e.target).data('value')))
+			this.model.addDate(fromString($(e.target).parent().data('value')))
 		},
 
 		showSample: function(e) {
-			this.model.sampleDate(fromString($(e.target).data('value')))
+			this.model.sampleDate(fromString($(e.target).parent().data('value')))
 		},
 
-		hideSample: function(e) {
+		hideSample: function() {
 			this.model.unsample();
 		},
 
@@ -219,13 +208,13 @@ function DaterangePicker(selector) {
 		}),
 
 		render: function() {
-			this.$el.addClass('daterangepicker').append(this.calendar_view.render().$el.hide());
+			this.$el.addClass('daterangepicker').append(this.calendar_view.render().$el).hide();
 			$(selector).after(this.$el)
 			return this;
 		},
 
 	  toggleCalendar: function() {
-			this.calendar_view.toggle();
+			this.$el.toggle();
 	    return this;
 	  }
 	});

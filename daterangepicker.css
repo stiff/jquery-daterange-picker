@@ -1,5 +1,7 @@
 .daterangepicker {
 	width: 250px;
+	border: solid 1px #ddd;
+	padding: 5px;
 }
 .daterangepicker .nav {
 	position: relative;
@@ -22,25 +24,28 @@
 .daterangepicker .calendar .date {
 	display: block;
 	float: left;
-	width: 13%;
+	width: 14.2%;
 	margin: 0 0;
+	text-decoration: none;
+}
+.daterangepicker .calendar .date span {
+	display: block;
 	padding: 4px 0;
 	text-align: center;
-	text-decoration: none;
 	color: #000;
 	border: solid #fff 1px;
 }
-.daterangepicker .calendar .date.inactive {
+.daterangepicker .calendar .inactive span {
 	background-color: #ccc;
 }
-.daterangepicker .calendar .date.hilite {
+.daterangepicker .calendar .hilite span {
 	background-color: #fa3;
 }
-.daterangepicker .calendar .date.startrange {
+.daterangepicker .calendar .startrange span {
 	border-top-left-radius: 7px;
 	border-bottom-left-radius: 7px;
 }
-.daterangepicker .calendar .date.endrange {
+.daterangepicker .calendar .endrange span {
 	border-top-right-radius: 7px;
 	border-bottom-right-radius: 7px;
 }
