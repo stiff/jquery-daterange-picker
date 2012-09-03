@@ -1,16 +1,16 @@
 # Daterange Picker
 
-This is a minimalist-style Jquery/Backbone/Underscore plugin for visual date range selectors.
+This is a minimalist-style jQuery/Backbone/Underscore plugin for visual date range selectors.
 
 Heavily inspired by a Stephen Celis' Prototype extension [Timeframe](http://stephencelis.github.com/timeframe/).
 
 ## Installation
 
-First set up required dependencies of Jquery, Backbone and Underscore:
+First set up required dependencies of jQuery, Backbone and Underscore:
 
 ```html
 <script src="lib/underscore.js" type="text/javascript" charset="utf-8"></script>
-<script src="lib/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="lib/jQuery.js" type="text/javascript" charset="utf-8"></script>
 <script src="lib/backbone.js" type="text/javascript" charset="utf-8"></script>
 ```
 
