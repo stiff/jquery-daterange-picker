@@ -1,4 +1,19 @@
 function DaterangePicker(selector) {
+	var month_names = [
+		'Январь',
+		'Февраль',
+		'Март',
+		'Апрель',
+		'Май',
+		'Июнь',
+		'Июль',
+		'Август',
+		'Сентябрь',
+		'Октябрь',
+		'Ноябрь',
+		'Декабрь'
+	];
+
 	/** helpers */
 	function dateWithoutTime(d) {
 		return new Date(d.getFullYear(), d.getMonth(), d.getDate())
@@ -29,12 +44,6 @@ function DaterangePicker(selector) {
 	}
 	function fromString(s) {
 		return new Date(s.substring(0, 4), s.substring(5, 7) - 1, s.substring(8, 10));
-	}
-	function logString(s) {
-		$('.log').prepend(s + '<br />');
-	}
-	function logModelState(event, model) {
-		logString(event +': '+ asString(model.get('start_date')) +' — '+ asString(model.get('end_date')) + ', sampling_state = '+ model.get('sampling').toString())
 	}
 	/** end of helpers */
 
@@ -106,6 +115,7 @@ function DaterangePicker(selector) {
 	});
 
 	var CalendarView = Backbone.View.extend({
+		className: 'calendar',
 	  events: {
 	    "mouseover .date"  	: "showSample",
 	    "mouseout .date"  	: "hideSample",
@@ -115,7 +125,7 @@ function DaterangePicker(selector) {
 	  },
 
 		render: function() {
-			this.$el.addClass('calendar').hide();
+			this.$el.html('');
 			var today = this.options.today,
 					bm = beginningOfMonth(today),
 					em = endOfMonth(today),
@@ -123,7 +133,7 @@ function DaterangePicker(selector) {
 					e = endOfWeek(em);
 
 			var nav_div = $('<div class="nav"><a href="#" class="prev_month">&lt;</a><a href="#" class="next_month">&gt;</a><span class="title"></span></div>')
-			nav_div.find('.title').html(today.getDate() +', '+ today.getFullYear());
+			nav_div.find('.title').html(month_names[today.getMonth()] +', '+ today.getFullYear());
 			this.$el.append(nav_div);
 
 			var i = 0;
@@ -140,18 +150,12 @@ function DaterangePicker(selector) {
 			}
 			this.$el.append('<div class="clr"></div>');
 
-			var with_log = function(msg, fx) {
-				var sub_a = _.rest(arguments, 2);
-				logModelState(msg, sub_a[0]);
-				fx.apply(this, sub_a);
-			}
+			/* there's no need to do this every render */
+			this.model.off(null, null, this);
+			this.model.on('change:start_date', this.highlightSample, this);
+			this.model.on('change:end_date', this.highlightSample, this);
 
-			this.model.on('change:start_date', _.wrap(this.highlightSample, _.bind(with_log, this, 'start_date changed')));
-			this.model.on('change:end_date', _.wrap(this.highlightSample, _.bind(with_log, this, 'end_date changed')));
-			this.model.on('change:sampling', function(model, smpl) {
-				logModelState('sampling changed', model)
-			})
-
+			this.highlightSample();
 			this.delegateEvents();
 			return this;
 		},
@@ -197,10 +201,14 @@ function DaterangePicker(selector) {
 		},
 
 		prevMonth: function() {
-			
+			var d = this.options.today;
+			this.options.today = new Date(d.getFullYear(), d.getMonth() - 1, 1);
+			this.render();
 		},
 		nextMonth: function() {
-			
+			var d = this.options.today;
+			this.options.today = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+			this.render();
 		}
 	});
 
@@ -211,7 +219,7 @@ function DaterangePicker(selector) {
 		}),
 
 		render: function() {
-			this.$el.addClass('daterangepicker').append(this.calendar_view.render().$el);
+			this.$el.addClass('daterangepicker').append(this.calendar_view.render().$el.hide());
 			$(selector).after(this.$el)
 			return this;
 		},
