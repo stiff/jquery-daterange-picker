@@ -10,7 +10,7 @@ First set up required dependencies of jQuery, Backbone and Underscore:
 
 ```html
 <script src="lib/underscore.js" type="text/javascript" charset="utf-8"></script>
-<script src="lib/jQuery.js" type="text/javascript" charset="utf-8"></script>
+<script src="lib/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="lib/backbone.js" type="text/javascript" charset="utf-8"></script>
 ```
 
