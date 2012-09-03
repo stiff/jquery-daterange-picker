@@ -33,7 +33,9 @@ Basically, what you need is a hyperlink with two linked inputs `start_date` and 
   <a href="#" class="date-picker-handle" data-start_date_input="#date_from" data-end_date_input="#date_to">show datepicker</a>
 ```
 
-Of course inputs can be hidden, text is used here for debugging purposes. Now instantiate the `DaterangePicker`:
+Of course inputs can be hidden, text is used here for debugging purposes. Values in inputs are taken as initial range selection. If it is empty today is used. After user selects a range this inputs will be updated with selected date range.
+
+Now instantiate the `DaterangePicker`:
 
 ```javascript
   $(function() {
