@@ -1,0 +1,23 @@
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Daterange Picker Sample</title>
+  <script src="lib/underscore.js" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/backbone.js" type="text/javascript" charset="utf-8"></script>
+  <script src="daterangepicker.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="daterangepicker.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  Date range:
+    <input type="text" name="date_from" value="&infin;" id="date_from">
+    <input type="text" name="date_to" value="2012-11-10" id="date_to">
+    <a href="#" class="date-picker-handler" data-start_date_input="#date_from" data-end_date_input="#date_to">show datepicker</a>
+  <script type="text/javascript">
+    $(function() {
+      dp = new DaterangePicker('.date-picker-handler');
+    })
+  </script>
+  <div class="log" style="height: 500px; overflow: hidden"></div>
+</body>
+</html>

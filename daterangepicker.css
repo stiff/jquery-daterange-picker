@@ -1,0 +1,49 @@
+.daterangepicker {
+	width: 250px;
+}
+.daterangepicker .nav {
+	position: relative;
+	text-align: center;
+	padding: 4px 0;
+}
+.daterangepicker .nav .prev_month, .daterangepicker .nav .next_month {
+	display: block;
+	position: absolute;
+	height: 100%;
+	width: 20px;
+	text-decoration: none;
+}
+.daterangepicker .nav .prev_month {
+	left: 0;
+}
+.daterangepicker .nav .next_month {
+	right: 0;
+}
+.daterangepicker .calendar .date {
+	display: block;
+	float: left;
+	width: 13%;
+	margin: 0 0;
+	padding: 4px 0;
+	text-align: center;
+	text-decoration: none;
+	color: #000;
+	border: solid #fff 1px;
+}
+.daterangepicker .calendar .date.inactive {
+	background-color: #ccc;
+}
+.daterangepicker .calendar .date.hilite {
+	background-color: #fa3;
+}
+.daterangepicker .calendar .date.startrange {
+	border-top-left-radius: 7px;
+	border-bottom-left-radius: 7px;
+}
+.daterangepicker .calendar .date.endrange {
+	border-top-right-radius: 7px;
+	border-bottom-right-radius: 7px;
+}
+.daterangepicker .clr {
+	clear: both;
+}
