@@ -43,7 +43,11 @@ function DaterangePicker(selector) {
 		return d ? d.getFullYear().toString() +'-'+ pad2(d.getMonth() + 1) +'-'+ pad2(d.getDate()) : 'nil';
 	}
 	function fromString(s) {
-		return new Date(s.substring(0, 4), s.substring(5, 7) - 1, s.substring(8, 10));
+		if (/^\d\d\d\d-\d\d-\d\d$/.test(s)) {
+			return new Date(s.substring(0, 4), s.substring(5, 7) - 1, s.substring(8, 10));
+		} else {
+			return null;
+		}
 	}
 	/** end of helpers */
 
