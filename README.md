@@ -51,6 +51,10 @@ See complete `sample.html` for more details.
 
 The best way to contribute is to implement your idea. Feel free to fork and make a pull request.
 
+## Changelog
+
+* 0.0.1 — Initial usable version 
+
 ## TODO
 
 * Document options and classes

@@ -268,3 +268,4 @@ function DaterangePicker(selector) {
     model: model
   };
 }
+DaterangePicker.version = '0.0.1'
