@@ -39,13 +39,23 @@ Now instantiate the `DaterangePicker`:
 
 ```javascript
   $(function() {
-    new DaterangePicker('.date-picker-handle');
+    dp = new DaterangePicker('.date-picker-handle');
   })
 ```
 
 It accepts only one argument — the selector of the trigger to bind itself to. Inputs selectors are taken from `data-`-attributes of the handle.
 
 See complete `sample.html` for more details.
+
+## Callbacks
+
+The returned object contains the model and view to enable programmable interface for datepicker.
+
+Callbacks can be added by `dp.model.on('change:start_date', function(model) {...})`.Model has following callbacks:
+
+* `change:start_date` - called every time start date changed
+* `change:end_date` - called every time end date changed
+* `after_select` — invoked when range (both dates) is selected
 
 ## Contributing
 

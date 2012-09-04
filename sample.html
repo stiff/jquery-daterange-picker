@@ -37,6 +37,7 @@
   <div class="page">
     <h1>Date range picker demo</h1>
 
+    <p>All samples are essentially the same, but with different initial values. First has some callbacks added.</p>
 
     <h2>Simple range</h2>
     <div class="block">
@@ -83,7 +84,7 @@
         	  }
         	}
       	})
-      	dp.model.on('inputs_updated', function(model) {
+      	dp.model.on('after_select', function(model) {
       	  alert("Searching "+ dp.model.startDate() +" — "+ model.endDate() + "...");
     	  })
       })

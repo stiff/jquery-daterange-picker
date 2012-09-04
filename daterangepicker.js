@@ -50,7 +50,7 @@
     updateInputs: function() {
       $(this.get('start_date_input')).val(asString(this.startDate()))
       $(this.get('end_date_input')).val(asString(this.endDate()))
-      this.trigger('inputs_updated', this);
+      this.trigger('after_select', this);
     },
     readInputs: function() {
       this.set({
@@ -213,7 +213,7 @@
       this.$el.append(this.calendar_view.render().$el).hide();
 
       this.model.off(null, null, this)
-      this.model.on('inputs_updated', function() {
+      this.model.on('after_select', function() {
         this.rangeSelected = true;
       }, this)
 
