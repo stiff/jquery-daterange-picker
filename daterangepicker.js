@@ -114,8 +114,8 @@ function DaterangePicker(selector) {
       return this.get('sampling');
     }
   }))({
-    start_date_input: $(selector).data('start_date_input'),
-    end_date_input: $(selector).data('end_date_input')
+    start_date_input: $(selector).data('start-date-input'),
+    end_date_input: $(selector).data('end-date-input')
   });
 
   var CalendarView = Backbone.View.extend({
