@@ -59,7 +59,7 @@ The best way to contribute is to implement your idea. Feel free to fork and make
 
 ## TODO
 
-* Document options and classes
+* Describe options and classes
 * Cleanup libs.
 
 ---

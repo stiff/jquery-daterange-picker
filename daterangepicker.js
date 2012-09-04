@@ -50,7 +50,7 @@
     updateInputs: function() {
       $(this.get('start_date_input')).val(asString(this.startDate()))
       $(this.get('end_date_input')).val(asString(this.endDate()))
-      this.trigger('inputs_updated');
+      this.trigger('inputs_updated', this);
     },
     readInputs: function() {
       this.set({
