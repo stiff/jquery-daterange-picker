@@ -232,12 +232,7 @@
     },
 
     toggleCalendar: function() {
-      if (this.$el.is(':visible')) {
-        this.hide()
-      } else {
-        this.show();
-      }
-      return this;
+      return this[this.$el.is(':visible') ? 'hide' : 'show']();
     },
 
     checkForClose: function() {
