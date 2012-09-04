@@ -254,9 +254,6 @@
   });
 
   /** helpers */
-  function dateWithoutTime(d) {
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate())
-  }
   function beginningOfWeek(d) {
     d = new Date(d);
     var day = d.getDay();
