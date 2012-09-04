@@ -24,6 +24,19 @@
 .daterangepicker .nav .next_month {
 	right: 0;
 }
+
+.daterangepicker .infinities {
+	position: relative;
+}
+.daterangepicker .infinities .minusinfin {
+	float: left;
+	width: 40% !important;
+}
+.daterangepicker .infinities .plusinfin {
+	float: right !important;
+	width: 40% !important;
+}
+
 .daterangepicker .calendar .date {
 	display: block;
 	float: left;

@@ -11,16 +11,23 @@
 <body>
   <div>
     Date range:
-    <input type="text" name="date_from" value="2012-11-07" id="date_from">&infin;
+    <input type="text" name="date_from" value="2012-11-07" id="date_from"> —
     <input type="text" name="date_to" value="2012-11-10" id="date_to">
     <a href="#" class="date-picker-handle" data-start-date-input="#date_from" data-end-date-input="#date_to">show datepicker</a>
   </div>
 
   <div>
-    Another range:
-    <input type="text" name="date2_from" value="2012-11-07" id="date2_from">&infin;
-    <input type="text" name="date2_to" value="2012-11-10" id="date2_to">
+    After date range:
+    <input type="text" name="date_from" value="2012-12-07" id="date2_from"> —
+    <input type="text" name="date_to" value="" id="date2_to">
     <a href="#" class="date-picker-handle" data-start-date-input="#date2_from" data-end-date-input="#date2_to">show datepicker</a>
+  </div>
+
+  <div>
+    Any date:
+    <input type="text" name="date_from" value="" id="date3_from">&infin;
+    <input type="text" name="date_to" value="" id="date3_to">
+    <a href="#" class="date-picker-handle" data-start-date-input="#date3_from" data-end-date-input="#date3_to">show datepicker</a>
   </div>
 
   <script type="text/javascript">
