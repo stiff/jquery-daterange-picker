@@ -9,10 +9,20 @@
   <link rel="stylesheet" href="daterangepicker.css" type="text/css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-  Date range:
+  <div>
+    Date range:
     <input type="text" name="date_from" value="2012-11-07" id="date_from">&infin;
     <input type="text" name="date_to" value="2012-11-10" id="date_to">
     <a href="#" class="date-picker-handle" data-start-date-input="#date_from" data-end-date-input="#date_to">show datepicker</a>
+  </div>
+
+  <div>
+    Another range:
+    <input type="text" name="date2_from" value="2012-11-07" id="date2_from">&infin;
+    <input type="text" name="date2_to" value="2012-11-10" id="date2_to">
+    <a href="#" class="date-picker-handle" data-start-date-input="#date2_from" data-end-date-input="#date2_to">show datepicker</a>
+  </div>
+
   <script type="text/javascript">
     $(function() {
       dp = new DaterangePicker('.date-picker-handle');

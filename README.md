@@ -53,14 +53,14 @@ The best way to contribute is to implement your idea. Feel free to fork and make
 
 ## Changelog
 
-* 0.0.1 — Initial usable version 
+* 0.0.2 — Multiple instances support
+* 0.0.1 — Initial usable version
 
 ## TODO
 
 * Document options and classes
 * Cleanup libs.
 * Add open ranges (infinite dates) support.
-* Cleanup the 
 
 ---
 

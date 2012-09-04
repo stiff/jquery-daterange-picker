@@ -1,4 +1,32 @@
-function DaterangePicker(selector) {
+(function() {
+
+	DaterangePicker = function(selector) {
+		var r = null;
+
+		$(selector).each(function() {
+			var model = new DaterangeModel({
+		    start_date_input: $(this).data('start-date-input'),
+		    end_date_input: $(this).data('end-date-input')
+		  });
+			model.readInputs();
+
+		  var main_view = new MainView({
+				model: model
+			}).render();
+	    $(this).after(main_view.$el.css({
+	      left: $(this).offset().left - 75 + 'px',
+	      top: 25 + $(this).offset().top + 'px'
+	    }))
+
+		  $(this).on('click', _.bind(main_view.toggleCalendar, main_view));
+
+			r = r || { model: model, view: main_view};
+		})
+
+	  return r;
+	}
+	DaterangePicker.version = '0.0.2'
+
   var month_names = [
     'Январь',
     'Февраль',
@@ -14,44 +42,7 @@ function DaterangePicker(selector) {
     'Декабрь'
   ];
 
-  /** helpers */
-  function dateWithoutTime(d) {
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate())
-  }
-  function beginningOfWeek(d) {
-    d = new Date(d);
-    var day = d.getDay();
-    d.setDate(d.getDate() - day + (day == 0 ? -6:1));
-    return d;
-  }
-  function endOfWeek(d) {
-    d = new Date(d);
-    var day = d.getDay();
-    d.setDate(d.getDate() + 6 - day + (day == 0 ? -6:1));
-    return d;
-  }
-  function beginningOfMonth(d) {
-    return new Date(d.getFullYear(), d.getMonth(), 1);
-  }
-  function endOfMonth(d) {
-    return new Date(d.getFullYear(), d.getMonth() + 1, 0);
-  }
-  function pad2(x) {
-    return x > 9 ? x.toString() : ('0' + x);
-  }
-  function asString(d) {
-    return d ? d.getFullYear().toString() +'-'+ pad2(d.getMonth() + 1) +'-'+ pad2(d.getDate()) : 'nil';
-  }
-  function fromString(s) {
-    if (/^\d\d\d\d-\d\d-\d\d$/.test(s)) {
-      return new Date(s.substring(0, 4), s.substring(5, 7) - 1, s.substring(8, 10));
-    } else {
-      return null;
-    }
-  }
-  /** end of helpers */
-
-  var model = new (Backbone.Model.extend({
+  var DaterangeModel = Backbone.Model.extend({
     defaults: {
       sampling: false
     },
@@ -113,9 +104,6 @@ function DaterangePicker(selector) {
         })
       }
     }
-  }))({
-    start_date_input: $(selector).data('start-date-input'),
-    end_date_input: $(selector).data('end-date-input')
   });
 
   var CalendarView = Backbone.View.extend({
@@ -206,25 +194,22 @@ function DaterangePicker(selector) {
   });
 
   var MainView = Backbone.View.extend({
+    className: 'daterangepicker',
     events: {
-      "mouseout"          : 'checkForClose',
-      "mouseover"         : 'doNotClose'
+      "mouseout"  : 'checkForClose',
+      "mouseover" : 'doNotClose'
     },
 
     render: function() {
       this.calendar_view = new CalendarView({
-        model: model,
-        today: model.startDate() || model.endDate() || new Date()
+        model: this.model,
+        today: this.model.startDate() || this.model.endDate() || new Date()
       });
 
-      this.$el.addClass('daterangepicker').append(this.calendar_view.render().$el).hide();
-      $(selector).after(this.$el)
-      this.$el.css({
-        left: $(selector).offset().left - 75 + 'px',
-        top: 25 + $(selector).offset().top + 'px'
-      })
+      this.$el.append(this.calendar_view.render().$el).hide();
 
-      model.on('inputs_updated', function() {
+			this.model.off(null, null, this)
+      this.model.on('inputs_updated', function() {
         this.rangeSelected = true;
       }, this)
 
@@ -233,10 +218,13 @@ function DaterangePicker(selector) {
 
     hide: function() {
       this.$el.hide();
+      return this;
     },
     show: function() {
-      this.$el.show();
+			$('.daterangepicker').css({zIndex: this.$el.css('zIndex') - 1})
+      this.$el.css({zIndex: this.$el.css('zIndex') + 1}).show();
       this.rangeSelected = false;
+      return this;
     },
 
     toggleCalendar: function() {
@@ -260,12 +248,41 @@ function DaterangePicker(selector) {
       }
     }
   });
-  model.readInputs();
-  var main_view = new MainView().render();
-  $(selector).on('click', _.bind(main_view.toggleCalendar, main_view))
 
-  return {
-    model: model
-  };
-}
-DaterangePicker.version = '0.0.1'
+  /** helpers */
+  function dateWithoutTime(d) {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate())
+  }
+  function beginningOfWeek(d) {
+    d = new Date(d);
+    var day = d.getDay();
+    d.setDate(d.getDate() - day + (day == 0 ? -6:1));
+    return d;
+  }
+  function endOfWeek(d) {
+    d = new Date(d);
+    var day = d.getDay();
+    d.setDate(d.getDate() + 6 - day + (day == 0 ? -6:1));
+    return d;
+  }
+  function beginningOfMonth(d) {
+    return new Date(d.getFullYear(), d.getMonth(), 1);
+  }
+  function endOfMonth(d) {
+    return new Date(d.getFullYear(), d.getMonth() + 1, 0);
+  }
+  function pad2(x) {
+    return x > 9 ? x.toString() : ('0' + x);
+  }
+  function asString(d) {
+    return d ? d.getFullYear().toString() +'-'+ pad2(d.getMonth() + 1) +'-'+ pad2(d.getDate()) : 'nil';
+  }
+  function fromString(s) {
+    if (/^\d\d\d\d-\d\d-\d\d$/.test(s)) {
+      return new Date(s.substring(0, 4), s.substring(5, 7) - 1, s.substring(8, 10));
+    } else {
+      return null;
+    }
+  }
+  /** end of helpers */
+})();
