@@ -125,8 +125,10 @@
       nav_div.find('.title').html(month_names[today.getMonth()] +', '+ today.getFullYear());
       this.$el.append(nav_div);
   
-      var infinity_div = $('<div class="infinities"><a href="#" class="minusinfin date" data-value="-Infinity"><span>-&infin;</span></a><a href="#" class="plusinfin date" data-value="Infinity"><span>+&infin;</span></a></div>');
-      this.$el.append(infinity_div).append('<div class="clr"></div>')
+      if (!this.options.withoutInfinity) {
+        var infinity_div = $('<div class="infinities"><a href="#" class="minusinfin date" data-value="-Infinity"><span>-&infin;</span></a><a href="#" class="plusinfin date" data-value="Infinity"><span>+&infin;</span></a></div>');
+        this.$el.append(infinity_div).append('<div class="clr"></div>')
+      }
 
       var i = 0;
       while (d <= e && i < 50) {
@@ -204,7 +206,8 @@
       var today = this.model.startDate() > -Infinity ? this.model.startDate() : (this.model.endDate() < Infinity ? this.model.endDate() : new Date().getTime());
       this.calendar_view = new CalendarView({
         model: this.model,
-        today: today
+        today: today,
+        withoutInfinity: !!this.options.handle.data('without-infinity')
       });
 
       this.$el.append(this.calendar_view.render().$el).hide();
