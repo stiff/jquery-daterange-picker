@@ -11,12 +11,9 @@
       model.readInputs();
 
       var main_view = new MainView({
+        handle: $(this),
         model: model
       }).render();
-      $(this).after(main_view.$el.css({
-        left: $(this).offset().left - 75 + 'px',
-        top: 25 + $(this).offset().top + 'px'
-      }))
 
       $(this).on('click', _.bind(main_view.toggleCalendar, main_view));
 
@@ -217,6 +214,8 @@
         this.rangeSelected = true;
       }, this)
 
+      this.options.handle.after(this.$el)
+
       return this;
     },
 
@@ -225,8 +224,12 @@
       return this;
     },
     show: function() {
-      $('.daterangepicker').css({zIndex: this.$el.css('zIndex') - 1})
-      this.$el.css({zIndex: this.$el.css('zIndex') + 1}).show();
+      $('.daterangepicker').css({zIndex: this.$el.css('zIndex')})
+      this.$el.css({
+        zIndex: this.$el.css('zIndex') + 1,
+        left: this.options.handle.offset().left - 75 + 'px',
+        top: 25 + this.options.handle.offset().top + 'px'
+      }).show();
       this.rangeSelected = false;
       return this;
     },
