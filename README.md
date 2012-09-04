@@ -33,7 +33,9 @@ Basically, what you need is a hyperlink with two linked inputs `start_date` and 
   <a href="#" class="date-picker-handle" data-start-date-input="#date_from" data-end-date-input="#date_to">show datepicker</a>
 ```
 
-Of course inputs can be hidden, text is used here for debugging purposes. Values in inputs are taken as initial range selection. If it is empty today is used. After user selects a range this inputs will be updated with selected date range.
+Of course inputs can be `hidden`, `text` is used here for debugging purposes. Values in inputs
+are used as initial range selection. An empty string means unlimited range. After user selects
+a range this inputs will be updated with selected date range.
 
 Now instantiate the `DaterangePicker`:
 
