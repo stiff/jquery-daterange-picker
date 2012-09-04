@@ -59,6 +59,7 @@ function DaterangePicker(selector) {
     updateInputs: function() {
       $(this.get('start_date_input')).val(asString(this.startDate()))
       $(this.get('end_date_input')).val(asString(this.endDate()))
+      this.trigger('inputs_updated');
     },
     readInputs: function() {
       this.set({
@@ -72,6 +73,9 @@ function DaterangePicker(selector) {
     },
     endDate: function() {
       return this.get('end_date');
+    },
+    sampling: function() {
+      return this.get('sampling');
     },
 
     addDate: function(date) {
@@ -108,10 +112,6 @@ function DaterangePicker(selector) {
           end_date: this.get('persisted_end_date')
         })
       }
-    },
-
-    sampling: function() {
-      return this.get('sampling');
     }
   }))({
     start_date_input: $(selector).data('start-date-input'),
@@ -206,6 +206,11 @@ function DaterangePicker(selector) {
   });
 
   var MainView = Backbone.View.extend({
+    events: {
+      "mouseout"          : 'checkForClose',
+      "mouseover"         : 'doNotClose'
+    },
+
     render: function() {
       this.calendar_view = new CalendarView({
         model: model,
@@ -218,17 +223,48 @@ function DaterangePicker(selector) {
         left: $(selector).offset().left - 75 + 'px',
         top: 25 + $(selector).offset().top + 'px'
       })
+
+      model.on('inputs_updated', function() {
+        this.rangeSelected = true;
+      }, this)
+
       return this;
     },
 
+    hide: function() {
+      this.$el.hide();
+    },
+    show: function() {
+      this.$el.show();
+      this.rangeSelected = false;
+    },
+
     toggleCalendar: function() {
-      this.$el.toggle();
+      if (this.$el.is(':visible')) {
+        this.hide()
+      } else {
+        this.show();
+      }
       return this;
+    },
+
+    checkForClose: function() {
+      if (this.rangeSelected) {
+        this.closeTimeout = _.delay(_.bind(this.hide, this), 350)
+      }
+    },
+    doNotClose: function() {
+      if (this.closeTimeout) {
+        window.clearTimeout(this.closeTimeout);
+        this.closeTimeout = null;
+      }
     }
   });
   model.readInputs();
   var main_view = new MainView().render();
   $(selector).on('click', _.bind(main_view.toggleCalendar, main_view))
 
-  return {m : model};
+  return {
+    model: model
+  };
 }
