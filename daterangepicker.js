@@ -1,7 +1,7 @@
 (function() {
 
   DaterangePicker = function(selector) {
-    var r = null;
+    var r = [];
 
     $(selector).each(function() {
       var model = new DaterangeModel({
@@ -15,14 +15,17 @@
         model: model
       }).render();
 
-      $(this).on('click', _.bind(main_view.toggleCalendar, main_view));
+      $(this).on('click', function() {
+        main_view.toggleCalendar()
+        return false;
+      });
 
-      r = r || { model: model, view: main_view};
+      r.push({ model: model, view: main_view, $el: $(this)});
     })
 
     return r;
   }
-  DaterangePicker.version = '0.0.3'
+  DaterangePicker.version = '0.1.0'
 
   var month_names = [
     'Январь',

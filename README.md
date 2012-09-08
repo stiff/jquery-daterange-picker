@@ -65,6 +65,7 @@ The best way to contribute is to implement your idea. Feel free to fork and make
 
 ## Changelog
 
+* 0.1.0 — Improved click events handling
 * 0.0.3 — Add open ranges (before date / after date) support.
 * 0.0.2 — Multiple instances support
 * 0.0.1 — Initial usable version

@@ -66,8 +66,8 @@
 
     <script type="text/javascript">
       $(function() {
-        dp = new DaterangePicker('.date-picker-handle');
-      	dp.model.on('change:start_date change:end_date', function(model) {
+        dr_pickers = new DaterangePicker('.date-picker-handle');
+      	dr_pickers[0].model.on('change:start_date change:end_date', function(model) {
       	  if (model.startDate() && model.endDate()) {
         	  if (model.startDate() > -Infinity) {
         	    if (model.endDate() < Infinity) {
@@ -84,7 +84,7 @@
         	  }
         	}
       	})
-      	dp.model.on('after_select', function(model) {
+      	dr_pickers[0].model.on('after_select', function(model) {
       	  alert("Searching "+ dp.model.startDate() +" — "+ model.endDate() + "...");
     	  })
       })
