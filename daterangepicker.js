@@ -156,6 +156,7 @@
 
     selectDate: function(e) {
       this.model.addDate(Number($(e.target).parent().data('value')))
+      return false;
     },
 
     showSample: function(e) {
@@ -187,11 +188,13 @@
       var d = new Date(this.options.today);
       this.options.today = new Date(d.getFullYear(), d.getMonth() - 1, 1).getTime();
       this.render();
+      return false;
     },
     nextMonth: function() {
       var d = new Date(this.options.today);
       this.options.today = new Date(d.getFullYear(), d.getMonth() + 1, 1).getTime();
       this.render();
+      return false;
     }
   });
 
